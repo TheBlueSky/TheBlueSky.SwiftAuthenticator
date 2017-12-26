@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Authors>Essam Almohammadi</Authors>
+    <PackageTags>HOTP TOTP Authenticator</PackageTags>
+    <RepositoryUrl></RepositoryUrl>
+    <PackageProjectUrl>https://github.com/TheBlueSky/TheBlueSky.SwiftAuthenticator</PackageProjectUrl>
+    <Copyright>© TheBlueSky.Net. All rights reserved.</Copyright>
+    <Company>TheBlueSky.Net</Company>
+    <Description>A simple and straightforward HOTP and TOTP library for .NET.</Description>
+    <PackageLicenseUrl>https://opensource.org/licenses/MIT</PackageLicenseUrl>
+    <Title>TheBlueSky.SwiftAuthenticator</Title>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Externals\LICENSE" />
+  </ItemGroup>
+
+</Project>
