@@ -10,10 +10,10 @@ namespace TheBlueSky.SwiftAuthenticator.Test
 	{
 		private const string Secret = "12345678901234567890";
 
-		public sealed class AuthenticatorConstructorTest
+		public static class AuthenticatorConstructorTest
 		{
 			[Fact]
-			public void PropertiesAreSetToTheirDefaultValueWhenUsingTheDefaultConstructor()
+			public static void PropertiesAreSetToTheirDefaultValueWhenUsingTheDefaultConstructor()
 			{
 				var defaultAuthenticatorAlgorithm = AuthenticatorAlgorithm.HMACSHA1;
 				var defaultNumberOfPasswordDigits = 6;
@@ -29,7 +29,7 @@ namespace TheBlueSky.SwiftAuthenticator.Test
 			}
 
 			[Fact]
-			public void PropertiesAreSetCorrectlyAsSpecifiedInAuthenticatorOptionsAction()
+			public static void PropertiesAreSetCorrectlyAsSpecifiedInAuthenticatorOptionsAction()
 			{
 				var authenticatorAlgorithm = AuthenticatorAlgorithm.HMACSHA256;
 				var numberOfPasswordDigits = 8;
@@ -51,10 +51,10 @@ namespace TheBlueSky.SwiftAuthenticator.Test
 			}
 		}
 
-		public sealed partial class GenerateCounterBasedPasswordTest
+		public static partial class GenerateCounterBasedPasswordTest
 		{
 			[Fact]
-			public void ThrowArgumentNullExceptionIfSecretParameterIsNull()
+			public static void ThrowArgumentNullExceptionIfSecretParameterIsNull()
 			{
 				var authenticator = new Authenticator();
 
@@ -62,7 +62,7 @@ namespace TheBlueSky.SwiftAuthenticator.Test
 			}
 
 			[Fact]
-			public void ThrowArgumentExceptionIfSecretParameterLengthIsLessThan128Bit()
+			public static void ThrowArgumentExceptionIfSecretParameterLengthIsLessThan128Bit()
 			{
 				var authenticator = new Authenticator();
 
@@ -73,7 +73,7 @@ namespace TheBlueSky.SwiftAuthenticator.Test
 			[InlineData(-1)]
 			[InlineData(0)]
 			[InlineData(3)]
-			public void ThrowArgumentExceptionIfDigitsParameterIsLessThanSix(int digits)
+			public static void ThrowArgumentExceptionIfDigitsParameterIsLessThanSix(int digits)
 			{
 				var authenticator = new Authenticator();
 
@@ -82,7 +82,7 @@ namespace TheBlueSky.SwiftAuthenticator.Test
 
 			[Theory]
 			[InlineData(13)]
-			public void ThrowArgumentExceptionIfDigitsParameterIsGreaterThanTen(int digits)
+			public static void ThrowArgumentExceptionIfDigitsParameterIsGreaterThanTen(int digits)
 			{
 				var authenticator = new Authenticator();
 
@@ -93,7 +93,7 @@ namespace TheBlueSky.SwiftAuthenticator.Test
 			[InlineData(AuthenticatorAlgorithm.HMACSHA256)]
 			[InlineData(AuthenticatorAlgorithm.HMACSHA512)]
 			[InlineData((AuthenticatorAlgorithm)5)]
-			public void ThrowInvalidOperationExceptionIfAuthenticatorAlgorithmIsNotHMACSHA1(AuthenticatorAlgorithm authenticatorAlgorithm)
+			public static void ThrowInvalidOperationExceptionIfAuthenticatorAlgorithmIsNotHMACSHA1(AuthenticatorAlgorithm authenticatorAlgorithm)
 			{
 				var authenticator = new Authenticator(options => options.AuthenticatorAlgorithm = authenticatorAlgorithm);
 
@@ -104,7 +104,7 @@ namespace TheBlueSky.SwiftAuthenticator.Test
 			[MemberData(nameof(GetExpectedCounterBasedPasswords), 6)]
 			[MemberData(nameof(GetExpectedCounterBasedPasswords), 8)]
 			[MemberData(nameof(GetExpectedCounterBasedPasswords), 10)]
-			public void GenerateCorrectPasswordWithCorrectNumberOfDigitsAsSpecifiedInOptions(int digits, ulong iterationNumber, string expectedPassword)
+			public static void GenerateCorrectPasswordWithCorrectNumberOfDigitsAsSpecifiedInOptions(int digits, ulong iterationNumber, string expectedPassword)
 			{
 				expectedPassword = expectedPassword.Substring(expectedPassword.Length - digits);
 
@@ -121,7 +121,7 @@ namespace TheBlueSky.SwiftAuthenticator.Test
 			[MemberData(nameof(GetExpectedCounterBasedPasswords), 6)]
 			[MemberData(nameof(GetExpectedCounterBasedPasswords), 8)]
 			[MemberData(nameof(GetExpectedCounterBasedPasswords), 10)]
-			public void GenerateCorrectPasswordWithCorrectNumberOfDigitsAsSpecifiedInParameters(int digits, ulong iterationNumber, string expectedPassword)
+			public static void GenerateCorrectPasswordWithCorrectNumberOfDigitsAsSpecifiedInParameters(int digits, ulong iterationNumber, string expectedPassword)
 			{
 				expectedPassword = expectedPassword.Substring(expectedPassword.Length - digits);
 
@@ -133,7 +133,7 @@ namespace TheBlueSky.SwiftAuthenticator.Test
 
 			[Theory]
 			[MemberData(nameof(GetExpectedCounterBasedPasswords), 6)]
-			public void GenerateCorrectSixDigitPasswordByDefaultIfDigitsParameterIsNotSpecified(int digits, ulong iterationNumber, string expectedPassword)
+			public static void GenerateCorrectSixDigitPasswordByDefaultIfDigitsParameterIsNotSpecified(int digits, ulong iterationNumber, string expectedPassword)
 			{
 				expectedPassword = expectedPassword.Substring(expectedPassword.Length - digits);
 
@@ -144,13 +144,13 @@ namespace TheBlueSky.SwiftAuthenticator.Test
 			}
 		}
 
-		public sealed class GenerateSecretTest
+		public static class GenerateSecretTest
 		{
 			[Theory]
 			[InlineData(-5)]
 			[InlineData(0)]
 			[InlineData(13)]
-			public void ThrowArgumentExceptionIfSizeParameterIsNotMultiplesOf40Bits(int expectedLength)
+			public static void ThrowArgumentExceptionIfSizeParameterIsNotMultiplesOf40Bits(int expectedLength)
 			{
 				var authenticator = new Authenticator();
 
@@ -161,7 +161,7 @@ namespace TheBlueSky.SwiftAuthenticator.Test
 			[InlineData(10)]
 			[InlineData(15)]
 			[InlineData(20)]
-			public void GenerateSecretWithCorrectLength(int expectedLength)
+			public static void GenerateSecretWithCorrectLength(int expectedLength)
 			{
 				var authenticator = new Authenticator();
 				var secret = authenticator.GenerateSecret(expectedLength);
@@ -171,7 +171,7 @@ namespace TheBlueSky.SwiftAuthenticator.Test
 			}
 
 			[Fact]
-			public void Generate20BytesSecretByDefaultIfSizeParameterIsNotSpecified()
+			public static void Generate20BytesSecretByDefaultIfSizeParameterIsNotSpecified()
 			{
 				const int expectedLength = 20;
 
@@ -183,10 +183,10 @@ namespace TheBlueSky.SwiftAuthenticator.Test
 			}
 		}
 
-		public sealed partial class GenerateTimeBasedPasswordTest
+		public static partial class GenerateTimeBasedPasswordTest
 		{
 			[Fact]
-			public void ThrowArgumentNullExceptionIfSecretParameterIsNull()
+			public static void ThrowArgumentNullExceptionIfSecretParameterIsNull()
 			{
 				var authenticator = new Authenticator();
 
@@ -194,7 +194,7 @@ namespace TheBlueSky.SwiftAuthenticator.Test
 			}
 
 			[Fact]
-			public void ThrowArgumentExceptionIfSecretParameterLengthIsLessThan128Bit()
+			public static void ThrowArgumentExceptionIfSecretParameterLengthIsLessThan128Bit()
 			{
 				var authenticator = new Authenticator();
 
@@ -205,7 +205,7 @@ namespace TheBlueSky.SwiftAuthenticator.Test
 			[InlineData(-1)]
 			[InlineData(0)]
 			[InlineData(3)]
-			public void ThrowArgumentExceptionIfDigitsParameterIsLessThanSix(int digits)
+			public static void ThrowArgumentExceptionIfDigitsParameterIsLessThanSix(int digits)
 			{
 				var authenticator = new Authenticator();
 
@@ -213,7 +213,7 @@ namespace TheBlueSky.SwiftAuthenticator.Test
 			}
 
 			[Fact]
-			public void ThrowArgumentExceptionIfDigitsParameterIsGreaterThanTen()
+			public static void ThrowArgumentExceptionIfDigitsParameterIsGreaterThanTen()
 			{
 				var authenticator = new Authenticator();
 
@@ -223,7 +223,7 @@ namespace TheBlueSky.SwiftAuthenticator.Test
 			[Theory]
 			[InlineData(-1)]
 			[InlineData(0)]
-			public void ThrowArgumentExceptionIfTimeStepParameterIsNotPositive(int timeStep)
+			public static void ThrowArgumentExceptionIfTimeStepParameterIsNotPositive(int timeStep)
 			{
 				var authenticator = new Authenticator();
 
@@ -231,7 +231,7 @@ namespace TheBlueSky.SwiftAuthenticator.Test
 			}
 
 			[Fact]
-			public void ThrowArgumentExceptionIfNowFuncReturnsValueLessThenAuthenticatorStartDateTime()
+			public static void ThrowArgumentExceptionIfNowFuncReturnsValueLessThenAuthenticatorStartDateTime()
 			{
 				var authenticator = new Authenticator(options => options.StartDateTime = DateTime.UtcNow);
 				var now = new DateTime(2017, 12, 16, 08, 46, 39, DateTimeKind.Utc);
@@ -240,7 +240,7 @@ namespace TheBlueSky.SwiftAuthenticator.Test
 			}
 
 			[Fact]
-			public void ThrowInvalidOperationExceptionIfAuthenticatorAlgorithmIsNotSupported()
+			public static void ThrowInvalidOperationExceptionIfAuthenticatorAlgorithmIsNotSupported()
 			{
 				var authenticator = new Authenticator(options => options.AuthenticatorAlgorithm = (AuthenticatorAlgorithm)5);
 
@@ -256,7 +256,7 @@ namespace TheBlueSky.SwiftAuthenticator.Test
 			[MemberData(nameof(GetExpectedTimeBasedPasswordsSHA1), 8)]
 			[MemberData(nameof(GetExpectedTimeBasedPasswordsSHA256), 8)]
 			[MemberData(nameof(GetExpectedTimeBasedPasswordsSHA512), 8)]
-			public void GenerateCorrectPasswordWithCorrectNumberOfDigitsAsSpecifiedInOptions(
+			public static void GenerateCorrectPasswordWithCorrectNumberOfDigitsAsSpecifiedInOptions(
 				string secrect, int digits, DateTime now, AuthenticatorAlgorithm authenticatorAlgorithm, string expectedPassword)
 			{
 				expectedPassword = expectedPassword.Substring(expectedPassword.Length - digits);
@@ -281,7 +281,7 @@ namespace TheBlueSky.SwiftAuthenticator.Test
 			[MemberData(nameof(GetExpectedTimeBasedPasswordsSHA1), 8)]
 			[MemberData(nameof(GetExpectedTimeBasedPasswordsSHA256), 8)]
 			[MemberData(nameof(GetExpectedTimeBasedPasswordsSHA512), 8)]
-			public void GenerateCorrectPasswordWithCorrectNumberOfDigitsAsSpecifiedInParameters(
+			public static void GenerateCorrectPasswordWithCorrectNumberOfDigitsAsSpecifiedInParameters(
 				string secrect, int digits, DateTime now, AuthenticatorAlgorithm authenticatorAlgorithm, string expectedPassword)
 			{
 				expectedPassword = expectedPassword.Substring(expectedPassword.Length - digits);
@@ -296,7 +296,7 @@ namespace TheBlueSky.SwiftAuthenticator.Test
 			[MemberData(nameof(GetExpectedTimeBasedPasswordsSHA1), 6)]
 			[MemberData(nameof(GetExpectedTimeBasedPasswordsSHA256), 6)]
 			[MemberData(nameof(GetExpectedTimeBasedPasswordsSHA512), 6)]
-			public void GenerateCorrectSixDigitPasswordWith30SecondsStepByDefaultIfDigitsAndTimeStepParametersAreNotSpecified(
+			public static void GenerateCorrectSixDigitPasswordWith30SecondsStepByDefaultIfDigitsAndTimeStepParametersAreNotSpecified(
 				string secrect, int digits, DateTime now, AuthenticatorAlgorithm authenticatorAlgorithm, string expectedPassword)
 			{
 				expectedPassword = expectedPassword.Substring(expectedPassword.Length - digits);

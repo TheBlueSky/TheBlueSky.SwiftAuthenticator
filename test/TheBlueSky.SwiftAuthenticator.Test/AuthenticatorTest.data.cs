@@ -5,7 +5,7 @@ namespace TheBlueSky.SwiftAuthenticator.Test
 {
 	public static partial class AuthenticatorTest
 	{
-		public sealed partial class GenerateCounterBasedPasswordTest
+		public static partial class GenerateCounterBasedPasswordTest
 		{
 			// test data from https://tools.ietf.org/html/rfc4226#appendix-D
 			[System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
@@ -24,7 +24,7 @@ namespace TheBlueSky.SwiftAuthenticator.Test
 			}
 		}
 
-		public sealed partial class GenerateTimeBasedPasswordTest
+		public static partial class GenerateTimeBasedPasswordTest
 		{
 			// test data from https://tools.ietf.org/html/rfc6238#appendix-B and its errata https://www.rfc-editor.org/errata_search.php?rfc=6238
 			[System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]

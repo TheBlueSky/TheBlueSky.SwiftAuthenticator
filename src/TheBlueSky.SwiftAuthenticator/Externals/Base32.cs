@@ -9,9 +9,10 @@ namespace TheBlueSky.SwiftAuthenticator.Externals
 	// The original code is part of ASP.NET Identity repository (https://github.com/aspnet/Identity/) under src/Microsoft.Extensions.Identity.Core/Base32.cs
 	// The code was slightly modified to match this project coding style and to add ExcludeFromCodeCoverageAttribute to Base32 class
 	[System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+	// JUSTIFICATION: This is not my code; I trust it as is :)
 	internal static class Base32
 	{
-		private static readonly string Base32Chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ234567";
+		private const string Base32Chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ234567";
 
 		public static string ToBase32(byte[] input)
 		{

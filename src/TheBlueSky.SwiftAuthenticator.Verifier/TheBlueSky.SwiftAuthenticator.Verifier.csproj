@@ -4,18 +4,18 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>Essam Almohammadi</Authors>
-    <PackageTags>HOTP TOTP Authenticator RFC-4226 RFC-6238</PackageTags>
+    <PackageTags>HOTP TOTP Authenticator Verifier RFC-4226 RFC-6238</PackageTags>
     <RepositoryUrl></RepositoryUrl>
     <PackageProjectUrl>https://github.com/TheBlueSky/TheBlueSky.SwiftAuthenticator</PackageProjectUrl>
     <Copyright>© TheBlueSky.Net. All rights reserved.</Copyright>
     <Company>TheBlueSky.Net</Company>
-    <Description>A simple and straightforward HOTP and TOTP library for .NET.</Description>
+    <Description>A simple and straightforward HOTP and TOTP verification library for .NET.</Description>
     <PackageLicenseUrl>https://opensource.org/licenses/MIT</PackageLicenseUrl>
-    <Title>TheBlueSky.SwiftAuthenticator</Title>
+    <Title>TheBlueSky.SwiftAuthenticator.Verifier</Title>
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Externals\LICENSE" />
+    <ProjectReference Include="..\TheBlueSky.SwiftAuthenticator\TheBlueSky.SwiftAuthenticator.csproj" />
   </ItemGroup>
 
 </Project>

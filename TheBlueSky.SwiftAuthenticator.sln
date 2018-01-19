@@ -1,14 +1,18 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27130.2010
+VisualStudioVersion = 15.0.27130.2020
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{2336E322-077E-49C7-9B31-BDD523C8C62C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheBlueSky.SwiftAuthenticator", "src\TheBlueSky.SwiftAuthenticator\TheBlueSky.SwiftAuthenticator.csproj", "{A4964BC0-EB49-43AF-9913-05DA9240036A}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheBlueSky.SwiftAuthenticator.Verifier", "src\TheBlueSky.SwiftAuthenticator.Verifier\TheBlueSky.SwiftAuthenticator.Verifier.csproj", "{BF63C223-5198-48CE-BDE9-2F5FDEE52137}"
+EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{9FC4328F-0B4A-4677-9FF1-DC007B936D08}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheBlueSky.SwiftAuthenticator.Test", "test\TheBlueSky.SwiftAuthenticator.Test\TheBlueSky.SwiftAuthenticator.Test.csproj", "{CCD52647-872C-4123-80EA-0A40AFE4D5CE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheBlueSky.SwiftAuthenticator.Verifier.Test", "test\TheBlueSky.SwiftAuthenticator.Verifier.Test\TheBlueSky.SwiftAuthenticator.Verifier.Test.csproj", "{146557A5-E9A3-46A1-8CB9-A769D11E6845}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -32,6 +36,18 @@ Global
 		{A4964BC0-EB49-43AF-9913-05DA9240036A}.Release|x64.Build.0 = Release|Any CPU
 		{A4964BC0-EB49-43AF-9913-05DA9240036A}.Release|x86.ActiveCfg = Release|Any CPU
 		{A4964BC0-EB49-43AF-9913-05DA9240036A}.Release|x86.Build.0 = Release|Any CPU
+		{BF63C223-5198-48CE-BDE9-2F5FDEE52137}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF63C223-5198-48CE-BDE9-2F5FDEE52137}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF63C223-5198-48CE-BDE9-2F5FDEE52137}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{BF63C223-5198-48CE-BDE9-2F5FDEE52137}.Debug|x64.Build.0 = Debug|Any CPU
+		{BF63C223-5198-48CE-BDE9-2F5FDEE52137}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{BF63C223-5198-48CE-BDE9-2F5FDEE52137}.Debug|x86.Build.0 = Debug|Any CPU
+		{BF63C223-5198-48CE-BDE9-2F5FDEE52137}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF63C223-5198-48CE-BDE9-2F5FDEE52137}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF63C223-5198-48CE-BDE9-2F5FDEE52137}.Release|x64.ActiveCfg = Release|Any CPU
+		{BF63C223-5198-48CE-BDE9-2F5FDEE52137}.Release|x64.Build.0 = Release|Any CPU
+		{BF63C223-5198-48CE-BDE9-2F5FDEE52137}.Release|x86.ActiveCfg = Release|Any CPU
+		{BF63C223-5198-48CE-BDE9-2F5FDEE52137}.Release|x86.Build.0 = Release|Any CPU
 		{CCD52647-872C-4123-80EA-0A40AFE4D5CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{CCD52647-872C-4123-80EA-0A40AFE4D5CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CCD52647-872C-4123-80EA-0A40AFE4D5CE}.Debug|x64.ActiveCfg = Debug|Any CPU
@@ -44,13 +60,27 @@ Global
 		{CCD52647-872C-4123-80EA-0A40AFE4D5CE}.Release|x64.Build.0 = Release|Any CPU
 		{CCD52647-872C-4123-80EA-0A40AFE4D5CE}.Release|x86.ActiveCfg = Release|Any CPU
 		{CCD52647-872C-4123-80EA-0A40AFE4D5CE}.Release|x86.Build.0 = Release|Any CPU
+		{146557A5-E9A3-46A1-8CB9-A769D11E6845}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{146557A5-E9A3-46A1-8CB9-A769D11E6845}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{146557A5-E9A3-46A1-8CB9-A769D11E6845}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{146557A5-E9A3-46A1-8CB9-A769D11E6845}.Debug|x64.Build.0 = Debug|Any CPU
+		{146557A5-E9A3-46A1-8CB9-A769D11E6845}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{146557A5-E9A3-46A1-8CB9-A769D11E6845}.Debug|x86.Build.0 = Debug|Any CPU
+		{146557A5-E9A3-46A1-8CB9-A769D11E6845}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{146557A5-E9A3-46A1-8CB9-A769D11E6845}.Release|Any CPU.Build.0 = Release|Any CPU
+		{146557A5-E9A3-46A1-8CB9-A769D11E6845}.Release|x64.ActiveCfg = Release|Any CPU
+		{146557A5-E9A3-46A1-8CB9-A769D11E6845}.Release|x64.Build.0 = Release|Any CPU
+		{146557A5-E9A3-46A1-8CB9-A769D11E6845}.Release|x86.ActiveCfg = Release|Any CPU
+		{146557A5-E9A3-46A1-8CB9-A769D11E6845}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{A4964BC0-EB49-43AF-9913-05DA9240036A} = {2336E322-077E-49C7-9B31-BDD523C8C62C}
+		{BF63C223-5198-48CE-BDE9-2F5FDEE52137} = {2336E322-077E-49C7-9B31-BDD523C8C62C}
 		{CCD52647-872C-4123-80EA-0A40AFE4D5CE} = {9FC4328F-0B4A-4677-9FF1-DC007B936D08}
+		{146557A5-E9A3-46A1-8CB9-A769D11E6845} = {9FC4328F-0B4A-4677-9FF1-DC007B936D08}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A567E981-F82F-4B36-9C7E-376D9C27F93F}
