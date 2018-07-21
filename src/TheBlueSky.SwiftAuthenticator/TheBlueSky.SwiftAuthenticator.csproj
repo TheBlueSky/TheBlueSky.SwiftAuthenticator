@@ -12,6 +12,7 @@
     <Description>A simple and straightforward HOTP and TOTP library for .NET.</Description>
     <PackageLicenseUrl>https://opensource.org/licenses/MIT</PackageLicenseUrl>
     <Title>TheBlueSky.SwiftAuthenticator</Title>
+    <PackageVersion>1.1.0</PackageVersion>
   </PropertyGroup>
 
   <ItemGroup>

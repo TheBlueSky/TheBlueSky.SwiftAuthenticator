@@ -113,7 +113,7 @@ namespace TheBlueSky.SwiftAuthenticator
 				Array.Reverse(counter);
 			}
 
-			var key = Encoding.ASCII.GetBytes(secret);
+			var key = Base32.FromBase32(secret);
 
 			if (key.Length < 16)
 			{

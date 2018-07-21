@@ -8,7 +8,7 @@ namespace TheBlueSky.SwiftAuthenticator.Test
 {
 	public static partial class AuthenticatorTest
 	{
-		private const string Secret = "12345678901234567890";
+		private static readonly string Secret = Base32.ToBase32("3132333435363738393031323334353637383930".ToByteArray());
 
 		public static class AuthenticatorConstructorTest
 		{

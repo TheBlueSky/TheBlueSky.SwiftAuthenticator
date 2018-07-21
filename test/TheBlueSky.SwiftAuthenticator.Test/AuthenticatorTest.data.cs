@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 
+using TheBlueSky.SwiftAuthenticator.Externals;
+
 namespace TheBlueSky.SwiftAuthenticator.Test
 {
 	public static partial class AuthenticatorTest
@@ -30,7 +32,7 @@ namespace TheBlueSky.SwiftAuthenticator.Test
 			[System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 			public static IEnumerable<object[]> GetExpectedTimeBasedPasswordsSHA1(int digits)
 			{
-				var secret = "12345678901234567890";
+				var secret = Base32.ToBase32("3132333435363738393031323334353637383930".ToByteArray());
 				var startDateTime = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc); // Unix epoch
 
 				yield return new object[] { secret, digits, startDateTime.AddSeconds(59), AuthenticatorAlgorithm.HMACSHA1, "94287082" };
@@ -45,7 +47,7 @@ namespace TheBlueSky.SwiftAuthenticator.Test
 			[System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 			public static IEnumerable<object[]> GetExpectedTimeBasedPasswordsSHA256(int digits)
 			{
-				var secret = "12345678901234567890123456789012";
+				var secret = Base32.ToBase32("3132333435363738393031323334353637383930313233343536373839303132".ToByteArray());
 				var startDateTime = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc); // Unix epoch
 
 				yield return new object[] { secret, digits, startDateTime.AddSeconds(59), AuthenticatorAlgorithm.HMACSHA256, "46119246" };
@@ -60,7 +62,7 @@ namespace TheBlueSky.SwiftAuthenticator.Test
 			[System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 			public static IEnumerable<object[]> GetExpectedTimeBasedPasswordsSHA512(int digits)
 			{
-				var secret = "1234567890123456789012345678901234567890123456789012345678901234";
+				var secret = Base32.ToBase32("31323334353637383930313233343536373839303132333435363738393031323334353637383930313233343536373839303132333435363738393031323334".ToByteArray());
 				var startDateTime = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc); // Unix epoch
 
 				yield return new object[] { secret, digits, startDateTime.AddSeconds(59), AuthenticatorAlgorithm.HMACSHA512, "90693936" };
@@ -70,6 +72,19 @@ namespace TheBlueSky.SwiftAuthenticator.Test
 				yield return new object[] { secret, digits, startDateTime.AddSeconds(2000000000), AuthenticatorAlgorithm.HMACSHA512, "38618901" };
 				yield return new object[] { secret, digits, startDateTime.AddSeconds(20000000000), AuthenticatorAlgorithm.HMACSHA512, "47863826" };
 			}
+		}
+
+		private static byte[] ToByteArray(this string hexString)
+		{
+			var numberChars = hexString.Length;
+			var bytes = new byte[numberChars / 2];
+
+			for (var i = 0; i < numberChars; i += 2)
+			{
+				bytes[i / 2] = Convert.ToByte(hexString.Substring(i, 2), 16);
+			}
+
+			return bytes;
 		}
 	}
 }
