@@ -1,6 +1,5 @@
 using System;
 using System.Security.Cryptography;
-using System.Text;
 
 using TheBlueSky.SwiftAuthenticator.Externals;
 
@@ -8,6 +7,13 @@ namespace TheBlueSky.SwiftAuthenticator
 {
 	public sealed class Authenticator
 	{
+		private static readonly RandomNumberGenerator RandomNumberGenerator =
+#if NETSTANDARD1_3
+			RandomNumberGenerator.Create();
+#else
+			new RNGCryptoServiceProvider();
+#endif
+
 		private readonly AuthenticatorOptions options = new AuthenticatorOptions();
 
 		public Authenticator(Action<AuthenticatorOptions> setupAction = null)
@@ -38,25 +44,6 @@ namespace TheBlueSky.SwiftAuthenticator
 			return this.GeneratePassword(secret, iterationNumber, digits);
 		}
 
-		public string GenerateSecret(int size = 20)
-		{
-			if (size % 5 != 0 || size < 5)
-			{
-				throw new ArgumentException(
-					"The size must be multiples of 40 bits, due to Base32 encoding requirements (refert to https://tools.ietf.org/html/rfc4648#section-6).",
-					nameof(size));
-			}
-
-			var buffer = new byte[size];
-
-			using (var rng = new RNGCryptoServiceProvider())
-			{
-				rng.GetBytes(buffer);
-			}
-
-			return Base32.ToBase32(buffer);
-		}
-
 		public string GenerateTimeBasedPassword(string secret, Func<DateTime> nowFunc = null)
 		{
 			return this.GenerateTimeBasedPassword(secret, nowFunc, this.NumberOfPasswordDigits, this.SizeOfTimeStep);
@@ -83,6 +70,22 @@ namespace TheBlueSky.SwiftAuthenticator
 			var counter = (ulong)((now - this.StartDateTime).TotalSeconds / timeStep);
 
 			return this.GeneratePassword(secret, counter, digits);
+		}
+
+		public static string GenerateSecret(int size = 20)
+		{
+			if (size % 5 != 0 || size < 5)
+			{
+				throw new ArgumentException(
+					"The size must be multiples of 40 bits, due to Base32 encoding requirements (refert to https://tools.ietf.org/html/rfc4648#section-6).",
+					nameof(size));
+			}
+
+			var buffer = new byte[size];
+
+			RandomNumberGenerator.GetBytes(buffer);
+
+			return Base32.ToBase32(buffer);
 		}
 
 		private string GeneratePassword(string secret, ulong iterationNumber, int digits)
@@ -144,7 +147,7 @@ namespace TheBlueSky.SwiftAuthenticator
 			switch (this.AuthenticatorAlgorithm)
 			{
 				case AuthenticatorAlgorithm.HMACSHA1:
-					return new HMACSHA1(key, true);
+					return new HMACSHA1(key);
 
 				case AuthenticatorAlgorithm.HMACSHA256:
 					return new HMACSHA256(key);

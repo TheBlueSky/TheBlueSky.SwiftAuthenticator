@@ -152,9 +152,7 @@ namespace TheBlueSky.SwiftAuthenticator.Test
 			[InlineData(13)]
 			public static void ThrowArgumentExceptionIfSizeParameterIsNotMultiplesOf40Bits(int expectedLength)
 			{
-				var authenticator = new Authenticator();
-
-				Assert.Throws<ArgumentException>(() => authenticator.GenerateSecret(expectedLength));
+				Assert.Throws<ArgumentException>(() => Authenticator.GenerateSecret(expectedLength));
 			}
 
 			[Theory]
@@ -163,8 +161,7 @@ namespace TheBlueSky.SwiftAuthenticator.Test
 			[InlineData(20)]
 			public static void GenerateSecretWithCorrectLength(int expectedLength)
 			{
-				var authenticator = new Authenticator();
-				var secret = authenticator.GenerateSecret(expectedLength);
+				var secret = Authenticator.GenerateSecret(expectedLength);
 				var actualLength = Base32.FromBase32(secret).Length;
 
 				Assert.True(expectedLength == actualLength);
@@ -175,8 +172,7 @@ namespace TheBlueSky.SwiftAuthenticator.Test
 			{
 				const int expectedLength = 20;
 
-				var authenticator = new Authenticator();
-				var secret = authenticator.GenerateSecret();
+				var secret = Authenticator.GenerateSecret();
 				var actualLength = Base32.FromBase32(secret).Length;
 
 				Assert.True(expectedLength == actualLength);

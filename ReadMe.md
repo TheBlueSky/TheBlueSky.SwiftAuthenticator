@@ -32,16 +32,16 @@ The simplest way to get started is to use the API with the default parameters:
 
 ### Generate password ###
 
-1. Create an instance of `Authenticator`:
+1. Generate a secret (will generate a `Base32` encoded 20-byte secret):
+
+```csharp
+var secret = Authenticator.GenerateSecret();
+```
+
+2. Create an instance of `Authenticator`:
 
 ```csharp
 var authenticator = new Authenticator();
-```
-
-2. Generate a secret (will generate a `Base32` encoded 20-byte secret):
-
-```csharp
-var secret = authenticator.GenerateSecret();
 ```
 
 3. Generate a password from the secret (will generate a 6-digit HOTP using the provided iteration and 6-digit TOTP using the current UTC time and 30-second time step):
@@ -80,14 +80,12 @@ var (isVerified, timeStepDrift) = verifier.VerifyTimeBasedPassword(totp, secret)
 
 ## Supported Frameworks ##
 
-Both the libraries target [.NET Standard 2.0](https://docs.microsoft.com/en-us/dotnet/standard/net-standard); hence, they can be referenced from applications and libraries that target .NET Standard 2.0 or any of the supported platforms:
+Both the libraries target .NET Standard 1.3 and .NET Standard 2.0 (read about .NET Standard [here](https://docs.microsoft.com/en-us/dotnet/standard/net-standard)); hence, they can be referenced from libraries that target .NET Standard 1.3 and above, and applications that target any of the supported platforms:
 
-* .NET Core 2.0
-* .NET Framework 4.6.1
-* Mono 5.4
-* Universal Windows Platform 10.0.16299
-* Xamarin.Android 8.0
-* Xamarin.iOS 10.14
-* Xamarin.Mac 3.8
-
-If your application or library targets .NET Standard 1.x or any of its supported platforms, let me know. `TheBlueSky.SwiftAuthenticator` and `TheBlueSky.SwiftAuthenticator.Verifier` can target at least .NET Standard 1.6, with a small modification, and with a slight API changes I can cross-compile them to target .NET Standard 1.3.
+* .NET Core 1.0 and above
+* .NET Framework 4.6 and above
+* Mono 4.6 and above
+* Universal Windows Platform 10.0 and above
+* Xamarin.Android 8.0 and above
+* Xamarin.iOS 10.0 and above
+* Xamarin.Mac 3.0 and above
